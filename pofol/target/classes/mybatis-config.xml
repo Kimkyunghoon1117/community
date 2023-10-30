@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="BoardDto" type="com.pofol.web.domain.BoardDto"/>
+		<typeAlias alias="ImageDto" type="com.pofol.web.domain.ImageDto"/>
+		<typeAlias alias="ImageFileDto" type="com.pofol.web.domain.ImageFileDto"/>
+		<typeAlias alias="LoginDto" type="com.pofol.web.domain.LoginDto"/>
+		<typeAlias alias="MemberDto" type="com.pofol.web.domain.MemberDto"/>
+		<typeAlias alias="SearchCondition" type="com.pofol.web.domain.SearchCondition"/>
+	</typeAliases>
+</configuration>

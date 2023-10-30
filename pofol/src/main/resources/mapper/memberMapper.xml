@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pofol.web.dao.MemberMapper">
+    <select id="login" resultType="LoginDto">
+    	select id, pw, name
+    	from member
+    	where id = #{id}
+    </select>
+    
+    <!-- 회원리스트 -->
+    <select id="list" parameterType="SearchCondition" resultType="MemberDto">
+   		select id, name, email, birth, reg_date, grade, status
+        from member
+        WHERE true
+        <include refid="searchCondition"/>
+        ORDER BY id asc
+        LIMIT #{offset}, #{pageSize}
+    </select>
+    
+    <select id="getTotalRow" parameterType="SearchCondition" resultType="int">
+        SELECT count(*)
+        FROM  member
+        WHERE true
+        <include refid="searchCondition"/>
+    </select>
+    
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="i"'>
+                AND id LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="n"'>
+                AND name LIKE concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+    </sql>
+    
+    <select id="view" resultType="MemberDto">
+    	select id,name,email,birth,reg_date,grade
+    	from member
+    	where id = #{id}
+    </select>
+    
+    <update id="modifyStatus" parameterType="MemberDto">
+    	update member
+    	set status = #{status}
+    	where id = #{id}
+    </update>
+    
+    <update id="modifyGrade" parameterType="MemberDto">
+    	update member
+    	set grade = #{grade}
+    	where id = #{id}
+    </update>
+    
+    <insert id="write" parameterType="MemberDto">
+    	insert into member(id,pw,name,email,birth)
+    	values(#{id},#{pw},#{name},#{email},#{birth});
+    </insert>
+</mapper>
